@@ -5,8 +5,8 @@
 O trabalho é dividido em 3 partes, que são apresentadas no [enunciado.pdf](). Cada parte terá um diretório no formato
 `/parte_x`, contendo arquivos de entrega e um README explicando sobre a parte em si
 
-Há um arquivo explicando sobre o diagrama entidade-relacionamento utilizando notação Crow's Foot, como gerá-lo e
-convertê-lo para um modelo relacional
+O arquivo [MER.md]() explica sobre o diagrama entidade-relacionamento utilizando notação Crow's Foot, como gerá-lo
+com Mermaid e convertê-lo para um modelo relacional
 
 ## Entregas
 
