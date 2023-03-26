@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS usuario;
 /**
  * Criação de tabelas e tipos 
  *
- * As tabelas foram criadas com base no mapeamento modelo conceitual do banco de
- * dados para o modelo relacional
+ * As tabelas foram criadas com base no mapeamento do modelo conceitual do banco
+ * de dados para o modelo relacional
  */
 
 CREATE TABLE usuario (
@@ -67,7 +67,8 @@ CREATE TABLE contribuicao (
 CREATE TABLE planilha (
     id_documento INT PRIMARY KEY REFERENCES documento(id),
     largura_linhas INT NOT NULL,
-    largura_colunas INT NOT NULL
+    largura_colunas INT NOT NULL,
+    CHECK (largura_linhas > 0 AND largura_colunas > 0)
 );
 
 CREATE TABLE celula (
@@ -75,7 +76,8 @@ CREATE TABLE celula (
     linha CHAR(1) NOT NULL,
     coluna CHAR(1) NOT NULL,
     conteudo TEXT NOT NULL,
-    cor VARCHAR(7) NOT NULL CHECK (cor ~ '^#[0-9a-fA-F]{6}$'), /* Cor hexadecimal */ 
+    cor VARCHAR(7) NOT NULL
+        CHECK (cor ~ '^#[0-9a-fA-F]{6}$') DEFAULT '#ffffff', /* Cor hexadecimal */ 
     PRIMARY KEY (id_planilha, linha, coluna)
 );
 
@@ -88,7 +90,7 @@ CREATE TYPE FONTE AS ENUM (
 CREATE TABLE documento_texto (
     id_documento INT PRIMARY KEY REFERENCES documento(id),
     fonte FONTE NOT NULL,
-    tamanho_fonte INT NOT NULL
+    tamanho_fonte INT NOT NULL CHECK (tamanho_fonte > 0)
 );
 
 CREATE TABLE bloco_texto (
@@ -112,6 +114,7 @@ CREATE TABLE pergunta (
 CREATE TABLE resposta (
     id SERIAL PRIMARY KEY,
     id_pergunta INT NOT NULL REFERENCES pergunta(id),
+    id_usuario INT NOT NULL REFERENCES usuario(id),
     conteudo VARCHAR(255) NOT NULL
 );
 
