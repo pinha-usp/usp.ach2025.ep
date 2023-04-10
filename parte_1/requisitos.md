@@ -7,8 +7,8 @@ servidor. Os requisitos para o sistema de banco de dados se encontram nos próxi
 parágrafos.
 
 No USP Drive, existem diversos usuários que podem acessá-lo. Cada usuário terá
-nome, email, senha, imagem e data de nascimento. A imagem do usuário é uma URL
-para alguma imagem na internet. A senha deve ter limite de caracteres. Também é
+nome, email, senha e data de nascimento. A imagem do usuário é uma URL para
+alguma imagem na internet. A senha deve ter limite de caracteres. Também é
 necessário saber a data de ingresso do usuário no sistema. Cada usuário pode ter
 diversas amizades opcionais com outros usuários.
 
