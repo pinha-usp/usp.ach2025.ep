@@ -18,6 +18,7 @@ instâncias desses documentos. Se o usuário criar uma instância, ele será o d
 do documento, caso contrário, ele será um contribuidor. Um usuário dono de um
 documento não pode ser também um contribuidor do mesmo documento. Cada instância
 de documento possui um nome e uma descrição, ambos com limite de caracteres.
+Também deve ser armazenado a data de criação do documento.
 
 Cada instância de planilha possui diversas células. Cada célula possui linha e
 coluna. O conjunto (linha, coluna) de uma célula deve ser único na planilha, e
