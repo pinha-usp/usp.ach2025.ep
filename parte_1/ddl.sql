@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS usuario;
 
 CREATE TABLE usuario (
     id serial primary key,
-    nome VARCHAR(255) NOT NULL UNIQUE,
+    nome VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
     data_nasc date NOT NULL,
@@ -53,7 +53,7 @@ CREATE TYPE TIPO_DOCUMENTO AS ENUM (
 CREATE TABLE documento (
     id serial primary key,
     tipo TIPO_DOCUMENTO NOT NULL,
-    nome VARCHAR(255) NOT NULL UNIQUE,
+    nome VARCHAR(255) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
     id_dono INT NOT NULL REFERENCES usuario(id)
 );
