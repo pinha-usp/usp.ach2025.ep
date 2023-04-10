@@ -31,7 +31,7 @@ DROP TABLE IF EXISTS usuario;
 CREATE TABLE usuario (
     id serial primary key,
     nome VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
     data_nasc date NOT NULL,
     data_ingresso date NOT NULL DEFAULT CURRENT_DATE 
