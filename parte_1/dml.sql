@@ -36,6 +36,7 @@ INSERT INTO amizade (id_remetente, id_destinatario) VALUES
  * Documentos dos usuários
  *
  * [id] [dono]    [tipo] 
+ * 1    Willian   PLANILHA
  * 2    Willian   PLANILHA
  * 3    Willian   DOCUMENTO_TEXTO
  * 4    Willian   FORMULARIO
