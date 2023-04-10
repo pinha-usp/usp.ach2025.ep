@@ -55,6 +55,7 @@ CREATE TABLE documento (
     tipo TIPO_DOCUMENTO NOT NULL,
     nome VARCHAR(255) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
+    data_criacao date NOT NULL DEFAULT CURRENT_DATE,
     id_dono INT NOT NULL REFERENCES usuario(id)
 );
 
