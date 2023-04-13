@@ -1,0 +1,28 @@
+/**
+ * Seleciona o id, nome, descrição e data de criação dos documentos que foram
+ * criados na última semana por todos os amigos de um usuário com um email em
+ * específico. Também deve ser selecionado o nome do amigo que criou o documento.
+ * Os resultados devem ser ordenados por data de criação, do mais recente para o
+ * mais antigo
+ */
+WITH amigos_usuario AS (
+    SELECT
+        u.id,
+        u.nome
+    FROM usuario u
+    INNER JOIN amizade a ON u.id = a.id_remetente OR u.id = a.id_destinatario
+    INNER JOIN usuario u2 ON
+        (u.id = a.id_remetente AND u2.id = a.id_destinatario) OR
+        (u.id = a.id_destinatario AND u2.id = a.id_remetente)
+    WHERE u2.email = 'fatima@email.com'
+)
+SELECT
+    d.id,
+    d.nome,
+    d.descricao,
+    d.data_criacao,
+    a.nome AS nome_amigo
+FROM documento d
+INNER JOIN amigos_usuario a ON d.id_dono = a.id
+WHERE d.data_criacao >= NOW() - INTERVAL '1 week'
+ORDER BY d.data_criacao DESC;

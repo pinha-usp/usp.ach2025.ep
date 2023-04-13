@@ -1,0 +1,53 @@
+/**
+ * Seleciona o id, tipo, nome e descrição de todos os documentos não inicializados
+ * de um usuário com um email em específico
+ *
+ * De todas as soluções especificadas na consulta abaixo e nas observações,
+ * provavelmente a da observação 2 é a mais indicada (apesar de trazer redundância),
+ * pois é a que tem a melhor performance e a menor complexidade de consulta
+ *
+ * Observação 1: Um documento não inicializado é aquele em que um registro da tabela 
+ * "documento" não está relacionado com nenhum registro de nenhuma das suas tabelas
+ * filhas (planilha, formulario, documento_texto, apresentacao)
+ *
+ * Observação 2: Uma possível alternativa para essa consulta seria ter um campo
+ * booleano indicando se um documento foi inicializado ou não. Note que essa solução
+ * traz redundância de dados, pois o mesmo resultado poderia ser obtido com a consulta
+ * abaixo, e seria necessário manter o campo booleano atualizado sempre que um
+ * documento fosse inicializado
+ *
+ * Observação 3: Outra possível alternativa seria utilizar um JOIN para cada tabela
+ * filha de documento, e verificar se os campos id_documento de cada tabela filha
+ * são nulos ou não. Essa solução pode ser menos eficiente por ter muitos JOINs
+ *
+ * Observação 4: Outra possível alternativa seria selecionar todos os documentos
+ * de um usuário, e programaticamente fazer uma consulta para cada documento para
+ * verificar com base em seu tipo se ele foi inicializado ou não, verificando em
+ * sua tabela corresondente. Essa solução é com certeza a mais lenta de todas,
+ * ainda mais se o usuário tiver muitos documentos
+ */
+SELECT
+    d.id,
+    d.tipo,
+    d.nome,
+    d.descricao
+FROM documento d
+INNER JOIN usuario u ON d.id_dono = u.id
+WHERE u.email = 'willian@email.com' 
+AND NOT EXISTS (
+    SELECT 1
+    FROM planilha p
+    WHERE p.id_documento = d.id 
+) AND NOT EXISTS (
+    SELECT 1
+    FROM formulario f
+    WHERE f.id_documento = d.id
+) AND NOT EXISTS (
+    SELECT 1
+    FROM documento_texto dt
+    WHERE dt.id_documento = d.id
+) AND NOT EXISTS (
+    SELECT 1
+    FROM apresentacao a
+    WHERE a.id_documento = d.id
+);

@@ -1,0 +1,24 @@
+/**
+ * As consultas foram feitas com base em requisitos que de fato seriam encontrados
+ * no sistema USP Drive. Nenhuma dessas consultas é dispensável
+ * 
+ * Como no sistema normalmente as consultas seriam feitas com base em informações
+ * de um usuário já logado, elas contém uma cláusula WHERE que filtra os resultados
+ * de acordo com o email do usuário logado
+ */
+
+/**
+ * Seleciona o id, tipo, nome, descrição e número de contribuidores de todos os
+ * documentos de um usuário com um email em específico
+ */
+SELECT
+    d.id,
+    d.tipo,
+    d.nome,
+    d.descricao,
+    COUNT(c.id_documento) AS numero_contribuidores
+FROM documento d
+INNER JOIN usuario u ON u.id = d.id_dono
+LEFT JOIN contribuicao c ON d.id = c.id_documento
+WHERE u.email = 'willian@email.com'
+GROUP BY d.id;

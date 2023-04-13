@@ -1,0 +1,16 @@
+/**
+ * Seleciona o id e a data limite de todos os formulários de um usuário com um
+ * email em específico e o número de usuários que responderam ao menos uma pergunta
+ * de cada formulário
+ */
+SELECT
+    f.id_documento,
+    f.data_limite,
+    COUNT(DISTINCT r.id_usuario) as numero_respostas
+FROM formulario f
+INNER JOIN documento d ON f.id_documento = d.id
+INNER JOIN usuario u ON d.id_dono = u.id
+LEFT JOIN pergunta p ON f.id_documento = p.id_formulario
+LEFT JOIN resposta r ON p.id = r.id_pergunta
+WHERE u.email = 'luciano@email.com'
+GROUP BY f.id_documento;
