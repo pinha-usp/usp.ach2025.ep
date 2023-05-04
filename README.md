@@ -1,6 +1,6 @@
 # USP - Bancos de Dados 2
 
-> Trabalho para a disciplina de Bancos de Dados 2 na USP
+> Implementação do trabalho
 
 O trabalho é dividido em 3 partes, que são apresentadas no [enunciado.pdf](). Cada parte terá um diretório no formato
 `/parte_x`, contendo arquivos de entrega e um README explicando sobre a parte em si
