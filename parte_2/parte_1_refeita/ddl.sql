@@ -1,9 +1,10 @@
 /**
  * Remoção de tabelas e tipos
  *
- * A remoção de tabelas e tipos é feita das últimas definições para as primeiras
- * para evitar problemas de dependência entre tabelas e tipos
+ * A remoção de tabelas, tipos e visões é feita das últimas definições para as
+ * primeiras para evitar problemas de dependência entre tabelas e tipos
  */
+DROP VIEW IF EXISTS documentos_usuarios;
 
 DROP TABLE IF EXISTS slide;
 DROP TABLE IF EXISTS apresentacao;
