@@ -1,0 +1,30 @@
+/**
+ * Criamos a tabela documento_drive, que no fundo é igual à tabela documento,
+ * porém, com o atributos composto info, além de que é utilizada para criarmos
+ * a herança.
+ *
+ * A tabela planilha_drive é uma tabela que herda de documento_drive, indicando
+ * que ela é um tipo de documento que o usuário poderá criar.
+ *
+ * Nas entregas anteriores, eu utilizei uma chave estrangeira na tabela planilha
+ * referenciando a tabela documento, para simular uma herança sem utilizar o
+ * INHERITS. Além disso, não precisamos mais do atributo tipo_documento na tabela
+ * documento_drive, pois a herança já indica o seu tipo.
+ *
+ * Esse processo de herança pode ser feito para todos os outros tipos de documento
+ * existentes no sistema (formulário, documento de texto e apresentação).
+ */
+
+DROP TABLE IF EXISTS planilha_drive;
+DROP TABLE IF EXISTS documento_drive;
+
+CREATE TABLE documento_drive (
+    id SERIAL PRIMARY KEY,
+    info Info,
+    id_dono INT NOT NULL REFERENCES usuario(id) 
+);
+
+CREATE TABLE planilha_drive (
+    largura_linhas INT NOT NULL,
+    largura_colunas INT NOT NULL
+) INHERITS (documento_drive);

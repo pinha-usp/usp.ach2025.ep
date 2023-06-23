@@ -397,5 +397,6 @@ Seeder.seed(
         PerguntaBuilder.get_table(),
         RespostaBuilder.get_table(),
         # ApresentacaoBuilder.get_table(),
-    ]
+    ],
+    filepath = "parte_1_refeita/dml.sql"
 )

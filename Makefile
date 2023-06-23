@@ -5,7 +5,7 @@ PASSWORD = $(password)
 SCRIPTS = \
 	parte_2/parte_1_refeita/ddl.sql \
 	parte_2/item_a/triggers.sql \
-	parte_3/seeds.sql \
+	parte_3/parte_1_refeita/dml.sql \
 	parte_2/item_b/visao.sql \
 	parte_2/item_c/visao.sql \
 
