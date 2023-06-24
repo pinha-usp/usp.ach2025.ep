@@ -24,7 +24,7 @@ LEFT JOIN resposta r ON p.id = r.id_pergunta
 WHERE u.email = 'luciano@email.com'
 GROUP BY f.id_documento;
 
-EXPLAIN (COSTS, VERBOSE, BUFFERS, FORMAT JSON)
+EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)
 SELECT
     d.id,
     d.tipo,
@@ -51,7 +51,7 @@ AND NOT EXISTS (
     WHERE a.id_documento = d.id
 );
 
-EXPLAIN (COSTS, VERBOSE, BUFFERS, FORMAT JSON)
+EXPLAIN (ANALYZE, COSTS, VERBOSE, BUFFERS, FORMAT JSON)
 WITH amigos_usuario AS (
     SELECT
         u.id,

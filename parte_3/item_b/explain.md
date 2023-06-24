@@ -18,6 +18,13 @@ GROUP BY d.id;
 
 ![](consulta_1.png)
 
+Os algoritmos do plano com maior custo são a busca sequencial e o índice sobre o
+campo de email. A busca sequencial por natureza tem um custo alto, pois todos os
+blocos precisam ser lidos. O índice sobre o campo de email, que é criado
+automaticamente pelo PostgreSQL por ser UNIQUE, tem um custo alto provavelmente
+porque o arquivo de dados não está organizado pelo campo email, então precisamos
+utilizar um índice secundário para encontrar os registros.
+
 ## Consulta 2
 
 ```sql
@@ -30,11 +37,16 @@ INNER JOIN documento d ON f.id_documento = d.id
 INNER JOIN usuario u ON d.id_dono = u.id
 LEFT JOIN pergunta p ON f.id_documento = p.id_formulario
 LEFT JOIN resposta r ON p.id = r.id_pergunta
-WHERE u.email = 'luciano@email.com'
+WHERE u.email = 'luciano@email.com'Zx c
 GROUP BY f.id_documento;
 ```
 
 ![](consulta_2.png)
+
+Nesse plano, precisamos de três buscas sequenciais, o que encarece muito o custo
+da consulta. Podemos criar índices para a tabela "resposta", pois ela
+naturalmente possui muitos registros, e ler sequencialmente todos os blocos do
+arquivo de dados deixa a consulta muito cara.
 
 ## Consulta 3
 
@@ -68,6 +80,13 @@ AND NOT EXISTS (
 
 ![](consulta_3.png)
 
+A tabela "documento" possui muito mais registros que as tabelas "planilha",
+"formulario", "documento_texto" e "apresentacao", então o custo da busca
+sequencial é maior para essa tabela do que seria para as outras. Ainda assim,
+lida a tabela "documento", provavelmente os registros ficarão em memória RAM,
+então o custo de ler sequencialmente a tabela "documento" é menor que o custo
+total da soma dos custos de ler sequencialmente as outras tabelas.
+
 ## Consulta 4
 
 ```sql
@@ -95,3 +114,9 @@ ORDER BY d.data_criacao DESC;
 ```
 
 ![](consulta_4.png)
+
+Percemos que o custo do loop aninhado é muito alto (dentre todas as outras
+consultas, é o que mais pesa). Além da falta de índices, o que pode estar
+causando esse problema é que estamos fundindo duas tabelas grandes, e como o
+algoritmo de loop aninhado custa (n x m) leituras de blocos (sendo n e m o
+número de registros de cada tabela), o custo acabou ficando muito alto.
