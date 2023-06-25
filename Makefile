@@ -8,7 +8,7 @@ SCRIPTS = \
 	parte_2/item_b/visao.sql \
 	parte_2/item_c/visao.sql \
 
-EXPLAINS = parte_3/item_b/explain.sql
+EXPLAINS = explain.sql
 
 EXECUTAR_SCRIPTS: $(EXPLAINS)
 	@$(foreach script, $^, \
