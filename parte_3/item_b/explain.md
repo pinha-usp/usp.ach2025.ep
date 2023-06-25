@@ -16,7 +16,7 @@ WHERE u.email = 'willian@email.com'
 GROUP BY d.id;
 ```
 
-![](consulta_1.png)
+![](https://github.com/willpinha/willpinha/assets/86596621/9168ce47-ead6-412f-9189-65227b637e6a)
 
 Os algoritmos do plano com maior custo são a busca sequencial e o índice sobre o
 campo de email. A busca sequencial por natureza tem um custo alto, pois todos os
@@ -41,7 +41,7 @@ WHERE u.email = 'luciano@email.com'Zx c
 GROUP BY f.id_documento;
 ```
 
-![](consulta_2.png)
+![](https://github.com/willpinha/willpinha/assets/86596621/d717f114-53df-4b70-aa1a-2d5125745688)
 
 Nesse plano, precisamos de três buscas sequenciais, o que encarece muito o custo
 da consulta. Podemos criar índices para a tabela "resposta", pois ela
@@ -78,7 +78,7 @@ AND NOT EXISTS (
 );
 ```
 
-![](consulta_3.png)
+![](https://github.com/willpinha/willpinha/assets/86596621/31af1632-e9cf-4767-a218-f6317e828188)
 
 A tabela "documento" possui muito mais registros que as tabelas "planilha",
 "formulario", "documento_texto" e "apresentacao", então o custo da busca
@@ -113,7 +113,7 @@ WHERE d.data_criacao >= NOW() - INTERVAL '1 week'
 ORDER BY d.data_criacao DESC;
 ```
 
-![](consulta_4.png)
+![](https://github.com/willpinha/willpinha/assets/86596621/5022517d-dfda-4333-8f48-ae31716316a5)
 
 Percemos que o custo do loop aninhado é muito alto (dentre todas as outras
 consultas, é o que mais pesa). Além da falta de índices, o que pode estar
